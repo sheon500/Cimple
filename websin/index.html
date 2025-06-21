@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xin</title>
+  <style>
+    :root {
+      --verde-claro: #d4f7dc;
+      --verde-fuerte: #4caf50;
+      --blanco: #ffffff;
+      --gris-suave: #f1f1f1;
+      --texto: #333;
+
+      /* Modo oscuro */
+      --bg-dark: #121212;
+      --card-dark: #1e1e1e;
+      --text-dark: #e0e0e0;
+      --boton-dark: #388e3c;
+      --gris-oscuro: #2a2a2a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+
+    body.light {
+      background: var(--verde-claro);
+      color: var(--texto);
+    }
+
+    header {
+      background: var(--verde-fuerte);
+      color: var(--blanco);
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    header h1 {
+      font-size: 2em;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: var(--card-dark);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    body.light nav {
+      background: var(--blanco);
+    }
+
+    nav button {
+      flex: 1 1 40%;
+      margin: 0.5rem;
+      padding: 0.75rem 1rem;
+      border: none;
+      background: var(--boton-dark);
+      color: white;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    body.light nav button {
+      background: var(--verde-fuerte);
+    }
+
+    nav button:hover {
+      background: #2e7d32;
+    }
+
+    section {
+      display: none;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-dark);
+      border-radius: 15px;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    body.light section {
+      background: var(--gris-suave);
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .galeria img {
+      width: 100%;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+    }
+
+    .titulo {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .spotify {
+      margin-top: 1rem;
+    }
+
+    .modo-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: var(--boton-dark);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 999;
+      transition: background 0.3s;
+    }
+
+    body.light .modo-btn {
+      background: var(--verde-fuerte);
+    }
+
+    .cancion-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "portada titulo"
+        "portada reproductor"
+        "explicacion explicacion";
+      gap: 0.5rem;
+      background: var(--card-dark);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .cancion-card {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "portada"
+          "titulo"
+          "reproductor"
+          "explicacion";
+      }
+    }
+
+    body.light .cancion-card {
+      background: var(--gris-suave);
+    }
+
+    .cancion-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .cancion-card h3 {
+      text-align: center;
+font-size: 200%;
+    }
+
+    .portada { grid-area: portada; }
+
+    .titulo-cancion { grid-area: titulo; background: var(--gris-oscuro); padding: 0.5rem; border-radius: 10px; text-align: center; }
+    body.light .titulo-cancion { background: var(--blanco); }
+
+    .reproductor { grid-area: reproductor; }
+    .explicacion { grid-area: explicacion; background: var(--gris-oscuro); padding: 1rem; border-radius: 10px; }
+    body.light .explicacion { background: var(--blanco); }
+  </style>
+</head>
+<body>
+  <button class="modo-btn" onclick="toggleModo()">☀️ Modo claro</button>
+
+  <header>
+    <h1>De Kenny para Sindy 💖</h1>
+  </header>
+
+  <nav>
+    <button onclick="mostrarSeccion('inicio')">Inicio</button>
+    <button onclick="mostrarSeccion('fotos')">Fotos</button>
+    <button onclick="mostrarSeccion('recuerdos')">Mejores recuerdos</button>
+    <button onclick="mostrarSeccion('playlist')">Playlist</button>
+  </nav>
+
+  <section id="inicio" class="active">
+    <div class="titulo">Feliz cumpleaños, mi amor 🎂</div>
+    <p>Hoy celebro tu vida, tu sonrisa y la suerte que tengo de tenerte. Este regalo está hecho con todo mi amor, para ti. 💝</p>
+  </section>
+
+  <section id="fotos">
+    <div class="titulo">Algunas de mis fotos favoritas 📸</div>
+    <div class="galeria">
+      <img src="img1.jpg" alt="Foto 1">
+      <img src="img2.jpg" alt="Foto 2">
+      <img src="img3.jpg" alt="Foto 3">
+      <img src="img4.jpg" alt="Foto 4">
+      <img src="img5.jpg" alt="Foto 5">
+      <img src="img6.jpg" alt="Foto 6">
+      <img src="img7.jpg" alt="Foto 7">
+    </div>
+  </section>
+
+  <section id="recuerdos">
+    <div class="titulo">Momentos que nunca olvido 💭</div>
+    <h3>Cada momento contigo es especial pero aqui algunos de los que mas recuerdo</h3>
+    <ul>
+      <li>La primera vez que fuiste donde mi en el area del parqueo.</li>
+      <li>El dia que viniste a mi casa por primera vez.</li>
+      <li>Como olvidar la salida al parque despues de la ginasia.</li>
+      <li>Cuando me diste el regalo de San Valentín</li>
+      <li>La noche en la que volvimos</li>
+    </ul>
+  </section>
+
+  <section id="playlist">
+    <div class="titulo">Xin</div>
+    <p>Cada canción representa algo que siento por ti. Aquí están algunas explicaciones:</p>
+
+    <div class="cancion-card">
+      <div class="portada"><img src="imgp1.png" alt="Portada canción"></div>
+      <div class="titulo-cancion"><h3>99.99%</h3></div>
+      <div class="reproductor"><img src="repo.png" alt="Reproductor Spotify"></div>
+      <div class="explicacion">
+        Sabes que soy muy creyente en que todo sucede por una razón y el conocernos nosotros no es la excepción, nuestra relación es producto de todas las decisiones que tomamos a lo largo de los años y si me preguntas a pesar de cada error que cometí en mi vida, no cambiaria nada si pudiera hacerlo ya que ese error pudo ser uno de los desencadenantes por el cual terminamos conociéndonos.
+<br>Y otra cosa es que entre tantas personas, tantos años que este mundo tiene existiendo coincidí contigo y hoy estamos juntos
+
+      </div>
+    </div>
+    <div class="cancion-card">
+        <div class="portada"><img src="imgp2.png" alt="Portada canción"></div>
+        <div class="titulo-cancion"><h3>o tu o yo</h3></div>
+        <div class="reproductor"><img src="repo.png" alt="Reproductor Spotify"></div>
+        <div class="explicacion">Se que aunque te cele de todas maneras o te reclame porque actúes o hables con alguien no puedo evitar que te sientas atraída por alguna otra persona, podría controlar toda tu vida y aun así no podría. Pero intentaré que nunca quieras recurrir a buscar cariño a otra persona para así poder evitar que quieras engañarme o que te llegues a enamorar de otra persona 
+        </div>
+      </div>
+      <div class="cancion-card">
+        <div class="portada"><img src="imgp3.png" alt="Portada canción"></div>
+        <div class="titulo-cancion"><h3>Amarte a la antigua</h3></div>
+        <div class="reproductor"><img src="repo.png" alt="Reproductor Spotify"></div>
+        <div class="explicacion">Aunque parezca que no soy así realmente me gusta demostrar el amor de todas las formas posibles. No me gusta solo hablar por redes, obviamente me gusta pasar tiempo juntos, cada momento, cada sonrisa compartida es mejor que un mensaje, aunque no tiene nada de malo hablar por chat las salidas y los regalos espontáneos son lo mejor.
+            Y quiero contigo tener un amor así, donde ambos demostremos lo que sentimos el uno por el otro y no dar por hecho que el otro sabe lo que sientes por él.
+            
+        </div>
+      </div>
+      <div class="cancion-card">
+        <div class="portada"><img src="imgp4.png" alt="Portada canción"></div>
+        <div class="titulo-cancion"><h3>Fantasía</h3></div>
+        <div class="reproductor"><img src="repo.png" alt="Reproductor Spotify"></div>
+        <div class="explicacion">Obviamente me siento atraído hacia ti de todas las maneras y realmente contigo descubrí fantasías que no sabía que tenía.
+           <br> Como parte de la misma canción “quiero besarte los lunares, estrías, defectos” cada parte de tu cuerpo me gusta y quiero poder algún día explorarlo al completo, queriendo cada cosa que para ti es un defecto pero para mi no es un defecto si no cada pequeña cosa que te hace ser tú, ser quién eres.
+            
+        </div>
+      </div>
+      <div class="cancion-card">
+        <div class="portada"><img src="imgp5.png" alt="Portada canción"></div>
+        <div class="titulo-cancion"><h3>Coleccionista de canciones</h3></div>
+        <div class="reproductor"><img src="repo.png" alt="Reproductor Spotify"></div>
+        <div class="explicacion">Desde que entraste en mi vida, cada momento contigo se ha vuelto algo que quiero guardar para siempre. No se trata solo de recuerdos, sino de emociones, miradas, palabras… como si cada uno fuera una canción que colecciono porque me hace sentir vivo.
+           <br> Nunca imaginé que alguien pudiera convertirse en el centro de tantas cosas que siento. Tú lo cambiaste todo. Contigo entendí lo que significa realmente querer a alguien, y lo más hermoso de todo es sentir que eso que yo siento, también lo recibo de ti.
+            
+        </div>
+      </div>
+      <div class="cancion-card">
+        <div class="portada"><img src="imgo6.png" alt="Portada canción"></div>
+        <div class="titulo-cancion"><h3>Until i found you</h3></div>
+        <div class="reproductor"><img src="repo.png" alt="Reproductor Spotify"></div>
+        <div class="explicacion">Antes de conocerte a ti realmente me había cerrado a sentir cariño por cualquier otra persona por cosas que me habían pasado antes, pero llegaste tú a demostrarme que volver a querer no estaba mal, cada que me demuestras que me quieres vuelvo a creer que es posible querer a alguien y ser correspondido. Y espero que esos sentimientos que sientes por mi nunca desaparezcan.
+        </div>
+      </div>
+
+    <div class="spotify">
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1owEedjddxDKDhxdPfjoci?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <script>
+    function mostrarSeccion(id) {
+      document.querySelectorAll('section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+
+    function toggleModo() {
+      document.body.classList.toggle('light');
+      document.querySelector('.modo-btn').textContent = document.body.classList.contains('light') ? '🌙 Modo oscuro' : '☀️ Modo claro';
+    }
+  </script>
+</body>
+</html>
